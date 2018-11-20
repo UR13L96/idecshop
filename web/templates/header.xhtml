@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <div style="float:left; width: 100%">
+            <h:graphicImage library="images" name="header.png" width="100%"/>
+        </div>
+        
+        <div style="position: absolute">
+            <h:graphicImage library="images" name="logo.jpg" id="logo_hd"/>
+        </div>
+        
+        <div id="botonera">
+            <h:form>
+                <nav>
+                    <ul>
+                        <li class="boton">
+                            <h:commandButton styleClass="boton_hd" action="index" value="Inicio"></h:commandButton>
+                        </li>
+                        <li class="boton">
+                            <h:commandButton styleClass="boton_hd" action="quienes-somos" value="¿Quiénes somos?"></h:commandButton>
+                        </li>
+                        <li class="boton">
+                            <div class="dropdown">
+                                <h:commandButton class="dropbtn" styleClass="boton_hd" value="Servicios"></h:commandButton>
+                                <div class="dropdown-content">
+                                    <h:commandButton styleClass="boton_hd" value="Catálogo" action="television"></h:commandButton>
+                                    <h:commandButton styleClass="boton_hd" value="Soporte técnico" action="internet"></h:commandButton>
+                                    <h:commandButton styleClass="boton_hd" value="CCTV" action="internet"></h:commandButton>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="boton">
+                            <div class="dropdown">
+                                <h:commandButton class="dropbtn" styleClass="boton_hd" value="Iniciar sesión" action="login"></h:commandButton>
+                                <div class="dropdown-content">
+                                    <h:commandButton styleClass="boton_hd" value="Mis servicios" action="#{beanUsuario.irLoggeado1()}"></h:commandButton>
+                                    <h:commandButton styleClass="boton_hd" value="Quejas" action="#{beanUsuario.irLoggeado2()}"></h:commandButton>
+                                    <h:commandButton styleClass="boton_hd" value="Cerrar sesión" action="index"></h:commandButton>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </h:form>
+        </div>        
+    </h:body>
+</html>
+

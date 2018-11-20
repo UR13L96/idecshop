@@ -1,0 +1,239 @@
+
+#top {
+    position: relative;
+    background-color: #ffffff;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+    height: 180px;
+}
+
+#bottom {
+    position: relative;
+    background-color: white;
+    padding: 5px;
+    margin: 50px 0px 0px 0px;
+    height: 260px;
+}
+
+#left {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: white;
+    padding: 5px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: white;
+  font-weight : bold;
+  text-decoration : none;
+}
+
+
+.Titulo1{
+    font-family: Impact,"Arial Black";
+    font-size: 50px;
+    color:  #575871 ;
+}
+
+.Titulo2{
+    font-family: Arial;
+    font-size: 20px;
+    color:  #575871 ;
+}
+
+.Titulo3{
+    font-family: Impact,"Arial Black";
+    font-size: 35px;
+    color: #c534f8;
+}
+
+.vision{
+    font-family: Arial;
+    font-size: 40px;
+    color:  #5968f7 ;    
+}
+
+.img1{
+    width: 150px;
+    height: 150px;
+}
+
+.datos{
+    font-family: Impact;
+    font-size: 20px;
+    color: #f9fafe ;
+}
+
+.im{
+    width: 50px;
+    height: 50px; 
+}
+
+.imgf{
+    width: 750px;
+    height: 80px; 
+}
+.imgt{
+    width: 749x;
+    height: 411px; 
+}
+
+.p1{
+    font-family: Impact,"Arial Black";
+    font-size: 18px;
+    color: #7b7b7e;
+}
+.p2{
+    font-family: Impact,"Arial Black";
+    font-size: 28px;
+    color:  #265ab4 ;
+}
+
+.ii{
+    width: 340;
+    height: 227;
+}
+
+.ii2{
+    width: 440;
+    height: 327;
+    margin-left: 200px;
+}
+#pre{
+    text-align: center;
+    font-family: Impact,"Arial Black";
+    font-size: 45px;
+    color: red;
+    
+}
+#paq{
+    text-align: center;
+    font-family: Impact,"Arial Black";
+    font-size: 55px;
+    color: #343d93;
+}
+#paq1{
+    text-align: center;
+    font-family: Impact,"Arial Black";
+    font-size: 35px;
+    color: #343d93;
+}
+.btn {
+    background-color:#cfe422;
+    border-radius:10px;
+    color:white;
+    display:inline-block;
+    line-height:2.2;
+    transition:all .5s ease;
+    text-align:center;
+    color: red;
+    font-family: Impact,"Arial Black";
+    padding:.4em .8em
+}
+.btn:hover {
+    background-color:#59CBE8
+}
+
+#h1f{
+    font-family: Impact,"Arial Black";
+    font-size: 35px;
+    color:  #0244b5;
+}
+
+#h3f{
+    font-family: Impact,"Arial Black";
+    font-size: 25px;
+    color:  #4a4d51;
+}
+
+#Re{
+    font-family: Impact;
+    font-size: 20px;
+    color: red;
+}
+
+.txt{
+    margin-left: 85px;
+}
+
+.ob1{
+    margin-left: 125px;
+}
+.dir1{
+    margin-left: 149px;
+}
+
+.men1{
+    margin-left: 85px; 
+    width: 170px;
+}
+
+.cel1{
+    margin-left: 173px;
+}
+
+.fono{
+    margin-left: 157.5px;
+}
+
+.tf{
+    font-family:"Arial Black";
+    font-size: 25px;
+    color: black;
+}
+
+.tiCam{
+    font-family:"Arial Black";
+    font-size: 15px;
+    color: black;
+}
+
+.boton_hd {
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+    width: 170px;
+}
+
+.boton_hd:hover {
+    cursor: pointer;
+    background-color: gray;
+    border: 2px solid black;
+}
