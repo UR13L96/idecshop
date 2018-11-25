@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controlador;
+
+import controlador.exceptions.RollbackFailureException;
+import entidad.Cliente;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+
+/**
+ *
+ * @author uriel
+ */
+public class ClienteFacade {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("idecshopPU");
+    private ClienteJpaController clienteJpa = new ClienteJpaController(emf);
+    
+    Cliente cliente;
+
+    public ClienteFacade() {
+    }
+    
+    public void registrar(Cliente cliente) throws Exception{
+        cliente.setNombre(cliente.getNombre());
+        cliente.setApellidos(cliente.getApellidos());
+        cliente.setCorreo(cliente.getCorreo());
+        cliente.setTelefono(cliente.getTelefono());
+        cliente.setContrasena(cliente.getContrasena());
+        clienteJpa.create(cliente);
+    }
+    
+    public Cliente buscarPorCorreo(String correo) {
+        cliente = clienteJpa.encontrarUsuarioxLogin(correo);
+        return cliente;
+    }
+}

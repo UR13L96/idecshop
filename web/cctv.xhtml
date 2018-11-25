@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>CCTV</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <div align="center">
+                    <h1>Circuito Cerrado de Televisión</h1>
+                    <br></br>
+                    <br></br>
+                    <p:panelGrid columns="2" layout="grid">
+                        <p:panel style="margin-top: 30px">
+                            <span>
+                                Somos Integradores especializados en Sistemas de CCTV.
+                                Los sistemas CCTV permiten tener vigilancia en lugares donde las 
+                                áreas a cubrir son bastante extensas, remotas, obscuras 
+                                o difíciles de accesar.
+                            </span>
+                            <br></br>
+                            <p:commandButton value="Contáctanos" class="margin-top-8" 
+                                             icon="ui-icon-suitcase" action="contacto"/>
+                        </p:panel>
+                        <div>
+                            <h3>Beneficios de CCTV</h3>
+                            <ul style="text-align: left">
+                                <li>Vigilancia en tiempo real.</li>
+                                <li>Supervisión y control de operaciones.</li>
+                                <li>Se reduce el personal de vigilancia.</li>
+                                <li>Supervisión de instalaciones y personal, estando dentro o fuera de la oficina.</li>
+                                <li>Las evidencias pueden ser Guardadas en USB, DVD, disco duro.</li>
+                                <li>La calidad en el servicio se mejora.</li>
+                                <li>Registro continuo de eventos que suceden en la organización.</li>
+                            </ul> 
+                        </div>
+                    </p:panelGrid>
+                </div>
+                
+                <div align="center" style="margin-top: 20px">
+                    <p:panel header="Nuestros paquetes" style="margin-bottom:20px">
+                        <p:panelGrid columns="3" layout="grid">
+                            <p:panel>
+                                <h3 class="color-red">Combo x8</h3>
+                            </p:panel>
+                            <p:panel>
+                                <h3 class="color-red">Combo x4</h3>
+                            </p:panel>
+                            <p:panel>
+                                <h3 class="color-red">Combo x2</h3>
+                            </p:panel>
+                        </p:panelGrid>
+                        <h:panelGrid columns="6">
+                            <p:graphicImage library="images" name="cctv/8cctv.jpg" style="height: 150px" />
+                            <p:panel>
+                                <ul style="text-align: left">
+                                    <li>DVR de 8 canales.</li>
+                                    <li>18 mts de cable siamés.</li>
+                                    <li>HDD 1Tb.</li>
+                                    <li>8 cámaras 720p/1mp.</li>
+                                    <li>Vision nocturna de 20mts.</li>
+                                </ul> 
+                            </p:panel>
+                            <p:graphicImage library="images" name="cctv/4cctv.jpg" style="height: 150px" />
+                            <p:panel>
+                                <ul style="text-align: left">
+                                    <li>DVR de 4 canales.</li>
+                                    <li>18 mts de cable siamés.</li>
+                                    <li>HDD 1Tb.</li>
+                                    <li>4 cámaras 720p/1mp.</li>
+                                    <li>Vision nocturna de 20mts.</li>
+                                </ul> 
+                            </p:panel>
+                            <p:graphicImage library="images" name="cctv/2cctv.jpg" style="height: 150px" />
+                            <p:panel>
+                                <ul style="text-align: left">
+                                    <li>DVR de 4 canales.</li>
+                                    <li>18 mts de cable siamés.</li>
+                                    <li>HDD 500Gb.</li>
+                                    <li>2 cámaras 720p/1mp.</li>
+                                </ul> 
+                            </p:panel>
+                        </h:panelGrid>
+                        <p:panelGrid columns="3" layout="grid">
+                            <p:panel>
+                                <h3>$9500</h3>
+                            </p:panel>
+                            <p:panel>
+                                <h3>$4500</h3>
+                            </p:panel>
+                            <p:panel>
+                                <h3>$3500</h3>
+                            </p:panel>
+                        </p:panelGrid>
+                    </p:panel>
+                </div>
+                
+                <div align="center" style="margin-top: 20px">
+                    <p:panel header="Las marcas que manejamos" style="margin-bottom:20px">
+                        <p:panelGrid columns="4" layout="grid">
+                            <p:panel style="margin-top: 22px">
+                                <p:graphicImage library="images" name="cctv/epcom.jpg" style="width: 150px" />
+                            </p:panel>
+                            <p:panel>
+                                <p:graphicImage library="images" name="cctv/dahua.png" style="height: 100px" />
+                            </p:panel>
+                            <p:panel style="margin-top: 35px">
+                                <p:graphicImage library="images" name="cctv/hikvision.png" style="width: 180px" />
+                            </p:panel>
+                            <p:panel style="margin-top: 15px">
+                                <p:graphicImage library="images" name="cctv/meriva.png" style="width: 150px" />
+                            </p:panel>
+                        </p:panelGrid>
+                    </p:panel>
+                </div>
+            </ui:define>
+
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

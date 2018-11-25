@@ -16,14 +16,10 @@ h1 {
 }
 
 a:link, a:visited {
-  color: white;
-  font-weight : bold;
   text-decoration: none;
 }
 
 a:link:hover, a:visited:hover  {
-  color: white;
-  font-weight : bold;
   text-decoration : none;
 }
 
@@ -137,4 +133,37 @@ a:link:hover, a:visited:hover  {
 
 .image-center {
     text-align: center;
+}
+
+.ui-widget-content {
+    border: none !important;
+    font-size: 16px;
+    color: black !important;
+}
+
+.ui-panelgrid-cell {
+    border: none !important;
+    height: 100% !important;
+}
+
+/***************** Colors  **************/
+
+.color-red {
+    color: #D20005;
+}
+
+.twenty-percent {
+     width: 20%;
+}
+
+.thirty-percent {
+     width: 30%;
+}
+
+.fifty-percent {
+     width: 50%;
+}
+
+.top-alignment {
+     vertical-align: top;
 }

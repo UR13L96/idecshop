@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+      
+    <h:head>
+        <title>Inicio de sesion</title>
+    </h:head>
+      <h:body> 
+       <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+           <ui:define name="content">
+                <div align="center">
+                     <hr />
+                   
+                     <h:panelGrid   id="matchGrid"  bgcolor="#FFEBCD" >
+                     <h:form >
+                         <center>
+                            <h2>Iniciar sesión </h2>
+                            <p:graphicImage  library="images" name="user.jpg" style="width:40%; height:20%" />
+                            </center>
+                         <p:growl id="growl" life="3000" />
+                        <h:panelGrid columns="2" id="hpgLogin" >  
+                      
+                            <p:outputLabel  value="Usuario:" />
+                            <p:inputText required="true" value="#{cliente.correo}"/>
+                      
+                            <p:outputLabel  value="Contraseña:" />
+                            <p:inputText required="true" type="password" value="#{cliente.contrasena}"/>      
+                            <h:commandLink value="Registrar" action="registro" immediate="true"/>
+
+                        </h:panelGrid>
+                         <br/>
+                         <br/>
+                         <center>                            
+                            <p:commandButton value="Entrar" update="hpgLogin,growl" action="#{cliente.autenticar()}" />
+                        </center>
+        
+                    </h:form>
+                         </h:panelGrid>
+                </div>
+            </ui:define>
+
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

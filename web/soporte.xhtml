@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Soporte Tecnico</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+               <h:form>
+            <div align="center">
+                <h2 align="center"> Soporte técnico para tu hogar </h2>
+                <br></br>
+                <p:graphicImage library="images" name="im1.jpg" style="width: 55%; height: 20%" />
+
+                <h4 align="center"> IDEC te brinda soporte tecnico correctivo y preventivo sin que tengas que salir de tu hogar</h4>
+                <p:commandButton value="Contáctanos" class="margin-top-8" 
+                                 icon="ui-icon-suitcase" action="contacto"/>
+                 
+                <br></br>
+            </div>
+            <div align="center">
+                <br></br>
+                <h2 align="center"> Soporte técnico para tu empresa</h2>
+                <br></br>
+                <p:graphicImage library="images" name="emp.jpg" style="width: 40%; height: 5%" />
+                <h4 align="center"> IDEC sabe lo importante que es tu empresa, por ello te ofrecemos el mejor servicio a un precio aun mejor</h4>
+                <p:commandButton value="Contáctanos" class="margin-top-8" 
+                                icon="ui-icon-suitcase" action="contacto"/>
+            </div>
+        </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
