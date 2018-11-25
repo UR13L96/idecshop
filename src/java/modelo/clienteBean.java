@@ -88,14 +88,14 @@ public class clienteBean implements Serializable {
         this.telefono = telefono;
     }
     
-    public String registrar() throws Exception
+    public void registrar() throws Exception
     {
         clienteFa = new ClienteFacade();
         
         Cliente cliente = new Cliente(nombre, apellidos, correo, telefono, contrasena);
         clienteFa.registrar(cliente);
 
-        return "index";
+        ec.redirect(ec.getRequestContextPath() + "/faces/iniciar.xhtml");
     }
     
      public void autenticar() throws IOException{

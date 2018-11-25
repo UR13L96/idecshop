@@ -5,18 +5,9 @@
  */
 package controlador;
 
-import controlador.exceptions.RollbackFailureException;
 import entidad.Cliente;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
 
 /**
  *
