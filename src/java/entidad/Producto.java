@@ -7,7 +7,6 @@ package entidad;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,7 +33,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre")
     , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
     , @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio")
-    , @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")})
+    , @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")
+    , @NamedQuery(name = "Producto.findByImagen", query = "SELECT p FROM Producto p WHERE p.imagen = :imagen")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,8 +62,11 @@ public class Producto implements Serializable {
     @NotNull
     @Column(name = "stock")
     private int stock;
-    @OneToMany(mappedBy = "fkIdProducto")
-    private Collection<ProductoOrden> productoOrdenCollection;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "imagen")
+    private String imagen;
     @JoinColumn(name = "fk_id_categoria_producto", referencedColumnName = "id")
     @ManyToOne
     private CategoriaProducto fkIdCategoriaProducto;
@@ -76,12 +78,13 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
-    public Producto(Integer id, String nombre, String descripcion, BigDecimal precio, int stock) {
+    public Producto(Integer id, String nombre, String descripcion, BigDecimal precio, int stock, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
+        this.imagen = imagen;
     }
 
     public Integer getId() {
@@ -124,12 +127,12 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-    public Collection<ProductoOrden> getProductoOrdenCollection() {
-        return productoOrdenCollection;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setProductoOrdenCollection(Collection<ProductoOrden> productoOrdenCollection) {
-        this.productoOrdenCollection = productoOrdenCollection;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public CategoriaProducto getFkIdCategoriaProducto() {

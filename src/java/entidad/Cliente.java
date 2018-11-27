@@ -6,7 +6,6 @@
 package entidad;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,7 +31,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Cliente.findByApellidos", query = "SELECT c FROM Cliente c WHERE c.apellidos = :apellidos")
     , @NamedQuery(name = "Cliente.findByCorreo", query = "SELECT c FROM Cliente c WHERE c.correo = :correo")
     , @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono")
-    , @NamedQuery(name = "Cliente.findByContrasena", query = "SELECT c FROM Cliente c WHERE c.contrasena = :contrasena")})
+    , @NamedQuery(name = "Cliente.findByContrasena", query = "SELECT c FROM Cliente c WHERE c.contrasena = :contrasena")
+    , @NamedQuery(name = "Cliente.findByImagen", query = "SELECT c FROM Cliente c WHERE c.imagen = :imagen")})
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,10 +66,9 @@ public class Cliente implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "contrasena")
     private String contrasena;
-    @OneToMany(mappedBy = "fkIdCliente")
-    private Collection<Contacto> contactoCollection;
-    @OneToMany(mappedBy = "fkIdCliente")
-    private Collection<Orden> ordenCollection;
+    @Size(max = 100)
+    @Column(name = "imagen")
+    private String imagen;
 
     public Cliente() {
     }
@@ -144,20 +142,12 @@ public class Cliente implements Serializable {
         this.contrasena = contrasena;
     }
 
-    public Collection<Contacto> getContactoCollection() {
-        return contactoCollection;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setContactoCollection(Collection<Contacto> contactoCollection) {
-        this.contactoCollection = contactoCollection;
-    }
-
-    public Collection<Orden> getOrdenCollection() {
-        return ordenCollection;
-    }
-
-    public void setOrdenCollection(Collection<Orden> ordenCollection) {
-        this.ordenCollection = ordenCollection;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     @Override

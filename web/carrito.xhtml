@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TeleCable</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+            
+            <ui:define name="content">
+                <div align="center">
+                    <h1>Carrito de compras</h1>
+                </div>                
+                <p:panelGrid columns="3" style="margin-top:20px; width: 100%" columnClasses="twenty-percent top-alignment, fifty-percent top-alignment, thirty-percent top-alignment">
+                    <p:column>
+                        <p:panel style="margin-bottom: auto">
+                            <span>
+                                <b>Filtrar por:</b>
+                            </span>
+                            <h:form style="margin-top: 30px">
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel for="category" value="Categoría"></p:outputLabel>
+                                    <p:selectOneMenu id="category" style="width: 100%">
+                                        <f:selectItem itemLabel="- Seleccione -" itemValue="1" />
+                                         <f:selectItem itemLabel="Almacenamiento" itemValue="2" />
+                                        <f:selectItem itemLabel="Celulares" itemValue="3" />
+                                        <f:selectItem itemLabel="Laptops" itemValue="4" />
+                                        <f:selectItem itemLabel="Impresoras" itemValue="5" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="name" value="Nombre"></p:outputLabel>
+                                    <p:inputText id="name" style="width: 100%"></p:inputText>
+                                    <p:button value="Buscar" style="margin-top: 16px"></p:button>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:panel>
+                    </p:column>
+                    
+                    <p:column>
+                        <p:panel>
+                            <span>
+                                <b>Resultados de la búsqueda:</b>
+                            </span>
+                            <h:form style="margin-top: 30px">
+                                <p:panelGrid columns="1">
+                                    <p:panelGrid columns="1" layout="grid">
+                                        <p:panel header="Memoria RAM para PC 8GB, DDR4 " style="margin-bottom:20px; border: 1px solid gray!important;">
+                                            <h:panelGrid columns="2" cellpadding="10">
+                                                <p:graphicImage library="images" name="catalogo/ram.jpg" style="width: 150px" />
+                                                <p:panel>
+                                                    <p>
+                                                        <b>Categoría:</b>
+                                                        Almacenamiento
+                                                    </p>
+                                                    <p>
+                                                        <b>Descripción:</b>
+                                                        Memoria RAM para PC ADATA - 8 GB, DDR4, 2133 MHz, Portátil, 260-pin SO-DIMM.
+                                                    </p>
+                                                    <p>
+                                                        <b>Precio:</b>
+                                                        $789.00
+                                                    </p>
+                                                    <div align="right">
+                                                        <p:spinner min="1" size="5"></p:spinner>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
+                                                    </div>
+                                                </p:panel>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                        <p:panel header="HDD portátil Seagate 2TB" style="margin-bottom:20px; border: 1px solid gray!important;">
+                                            <h:panelGrid columns="2" cellpadding="10" style="height: 100%">
+                                                <p:graphicImage library="images" name="catalogo/hdd.jpg" style="height: 100px" />
+                                                <p:panel>
+                                                    <p>
+                                                        <b>Categoría:</b>
+                                                        Almacenamiento
+                                                    </p>
+                                                    <p>
+                                                        <b>Descripción:</b>
+                                                        Seagate Backup Plus Slim Disco duro portátil con respaldo de dispositivos móviles, USB 3.0, 2 TB, plateado 
+                                                    </p>
+                                                    <p>
+                                                        <b>Precio:</b>
+                                                        $1623.00
+                                                    </p>
+                                                    <div align="right">
+                                                        <p:spinner min="1" size="5"></p:spinner>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
+                                                    </div>
+                                                </p:panel>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:panelGrid>
+                                    <p:panelGrid columns="1" layout="grid">
+                                        <p:panel header="Tarjeta de Memoria 64GB" style="margin-bottom:20px; border: 1px solid gray!important;">
+                                            <h:panelGrid columns="2" cellpadding="10">
+                                                <p:graphicImage library="images" name="catalogo/sd.jpg" style="width: 150px" />
+                                                <p:panel>
+                                                    <p>
+                                                        <b>Categoría:</b>
+                                                        Almacenamiento
+                                                    </p>
+                                                    <p>
+                                                        <b>Descripción:</b>
+                                                        Samsung MB-ME64GA/AM Tarjeta de Memoria microSDHC EVO Select DE 64 GB con Adaptador 
+                                                    </p>
+                                                    <p>
+                                                        <b>Precio:</b>
+                                                        $329.00
+                                                    </p>
+                                                    <div align="right">
+                                                        <p:spinner min="1" size="5"></p:spinner>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
+                                                    </div>
+                                                </p:panel>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                        <p:panel header="USB Kingston 32GB" style="margin-bottom:20px; border: 1px solid gray!important;">
+                                            <h:panelGrid columns="2" cellpadding="10">
+                                                <p:graphicImage library="images" name="catalogo/usb.jpg" style="height: 100px" />
+                                                <p:panel>
+                                                    <p>
+                                                        <b>Categoría:</b>
+                                                        Almacenamiento
+                                                    </p>
+                                                    <p>
+                                                        <b>Descripción:</b>
+                                                        Kingston Digital 32GB 100 G3 USB 3.0 DataTraveler
+                                                        - Compacto y liviano
+                                                        - Garantía ilímitada de por vida
+                                                        - Diseño elegante
+                                                    </p>
+                                                    <p>
+                                                        <b>Precio:</b>
+                                                        $175.00
+                                                    </p>
+                                                    <div align="right">
+                                                        <p:spinner min="1" size="5"></p:spinner>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
+                                                    </div>
+                                                </p:panel>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:panelGrid>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:panel>
+                    </p:column>
+                    
+                    <p:column>
+                        <p:panel>
+                            <span>
+                                <b>Artículos en carrito:</b>
+                            </span>
+                            <h:form style="margin-top: 30px">
+                                <p:panelGrid style="margin-top:20px">
+                                    <f:facet name="header">
+                                        <p:row>
+                                            <p:column>Cant.</p:column>
+                                            <p:column>Artículo</p:column>
+                                            <p:column>Precio</p:column>
+                                        </p:row>
+
+                                    </f:facet>
+
+                                    <p:row>
+                                        <p:column>2</p:column>
+                                        <p:column>Memoria RAM para PC 8GB, DDR4</p:column>
+                                        <p:column>$789.00</p:column>
+                                    </p:row>
+                                    
+                                    <p:row>
+                                        <p:column>3</p:column>
+                                        <p:column>Ratón inalámbrico óptico</p:column>
+                                        <p:column>$129.00</p:column>
+                                    </p:row>
+                                    
+                                    <p:row>
+                                        <p:column>1</p:column>
+                                        <p:column>Tarjeta de Memoria 64GB</p:column>
+                                        <p:column>$329.00</p:column>
+                                    </p:row>
+                                    
+                                    <p:row>
+                                        <p:column>1</p:column>
+                                        <p:column>Teclado Logitech G213</p:column>
+                                        <p:column>$225.00</p:column>
+                                    </p:row>
+
+                                    <f:facet name="footer">
+                                        <p:row>
+                                            <p:column  colspan="2" style="text-align: right">
+                                                Total
+                                            </p:column>
+                                            <p:column>
+                                                $2264.00
+                                            </p:column>
+                                        </p:row>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </h:form>
+                            <div align="right">
+                                <p:button value="Confirmar compra" style="margin-top: 16px"></p:button>
+                            </div>
+                        </p:panel>
+                    </p:column>
+                    
+                </p:panelGrid>
+            </ui:define>
+                
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

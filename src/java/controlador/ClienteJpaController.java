@@ -9,18 +9,15 @@ import controlador.exceptions.NonexistentEntityException;
 import controlador.exceptions.RollbackFailureException;
 import entidad.Cliente;
 import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import entidad.Contacto;
-import java.util.ArrayList;
-import java.util.Collection;
-import entidad.Orden;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityTransaction;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -41,7 +38,6 @@ public class ClienteJpaController implements Serializable {
     public void create(Cliente cliente) throws Exception {
         EntityManager em = null;
         try {
-           
         em = getEntityManager();
         em.getTransaction().begin();
         em.persist(cliente);
@@ -71,60 +67,7 @@ public class ClienteJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
-            Cliente persistentCliente = em.find(Cliente.class, cliente.getId());
-            Collection<Contacto> contactoCollectionOld = persistentCliente.getContactoCollection();
-            Collection<Contacto> contactoCollectionNew = cliente.getContactoCollection();
-            Collection<Orden> ordenCollectionOld = persistentCliente.getOrdenCollection();
-            Collection<Orden> ordenCollectionNew = cliente.getOrdenCollection();
-            Collection<Contacto> attachedContactoCollectionNew = new ArrayList<Contacto>();
-            for (Contacto contactoCollectionNewContactoToAttach : contactoCollectionNew) {
-                contactoCollectionNewContactoToAttach = em.getReference(contactoCollectionNewContactoToAttach.getClass(), contactoCollectionNewContactoToAttach.getId());
-                attachedContactoCollectionNew.add(contactoCollectionNewContactoToAttach);
-            }
-            contactoCollectionNew = attachedContactoCollectionNew;
-            cliente.setContactoCollection(contactoCollectionNew);
-            Collection<Orden> attachedOrdenCollectionNew = new ArrayList<Orden>();
-            for (Orden ordenCollectionNewOrdenToAttach : ordenCollectionNew) {
-                ordenCollectionNewOrdenToAttach = em.getReference(ordenCollectionNewOrdenToAttach.getClass(), ordenCollectionNewOrdenToAttach.getId());
-                attachedOrdenCollectionNew.add(ordenCollectionNewOrdenToAttach);
-            }
-            ordenCollectionNew = attachedOrdenCollectionNew;
-            cliente.setOrdenCollection(ordenCollectionNew);
             cliente = em.merge(cliente);
-            for (Contacto contactoCollectionOldContacto : contactoCollectionOld) {
-                if (!contactoCollectionNew.contains(contactoCollectionOldContacto)) {
-                    contactoCollectionOldContacto.setFkIdCliente(null);
-                    contactoCollectionOldContacto = em.merge(contactoCollectionOldContacto);
-                }
-            }
-            for (Contacto contactoCollectionNewContacto : contactoCollectionNew) {
-                if (!contactoCollectionOld.contains(contactoCollectionNewContacto)) {
-                    Cliente oldFkIdClienteOfContactoCollectionNewContacto = contactoCollectionNewContacto.getFkIdCliente();
-                    contactoCollectionNewContacto.setFkIdCliente(cliente);
-                    contactoCollectionNewContacto = em.merge(contactoCollectionNewContacto);
-                    if (oldFkIdClienteOfContactoCollectionNewContacto != null && !oldFkIdClienteOfContactoCollectionNewContacto.equals(cliente)) {
-                        oldFkIdClienteOfContactoCollectionNewContacto.getContactoCollection().remove(contactoCollectionNewContacto);
-                        oldFkIdClienteOfContactoCollectionNewContacto = em.merge(oldFkIdClienteOfContactoCollectionNewContacto);
-                    }
-                }
-            }
-            for (Orden ordenCollectionOldOrden : ordenCollectionOld) {
-                if (!ordenCollectionNew.contains(ordenCollectionOldOrden)) {
-                    ordenCollectionOldOrden.setFkIdCliente(null);
-                    ordenCollectionOldOrden = em.merge(ordenCollectionOldOrden);
-                }
-            }
-            for (Orden ordenCollectionNewOrden : ordenCollectionNew) {
-                if (!ordenCollectionOld.contains(ordenCollectionNewOrden)) {
-                    Cliente oldFkIdClienteOfOrdenCollectionNewOrden = ordenCollectionNewOrden.getFkIdCliente();
-                    ordenCollectionNewOrden.setFkIdCliente(cliente);
-                    ordenCollectionNewOrden = em.merge(ordenCollectionNewOrden);
-                    if (oldFkIdClienteOfOrdenCollectionNewOrden != null && !oldFkIdClienteOfOrdenCollectionNewOrden.equals(cliente)) {
-                        oldFkIdClienteOfOrdenCollectionNewOrden.getOrdenCollection().remove(ordenCollectionNewOrden);
-                        oldFkIdClienteOfOrdenCollectionNewOrden = em.merge(oldFkIdClienteOfOrdenCollectionNewOrden);
-                    }
-                }
-            }
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -158,16 +101,6 @@ public class ClienteJpaController implements Serializable {
                 cliente.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Contacto> contactoCollection = cliente.getContactoCollection();
-            for (Contacto contactoCollectionContacto : contactoCollection) {
-                contactoCollectionContacto.setFkIdCliente(null);
-                contactoCollectionContacto = em.merge(contactoCollectionContacto);
-            }
-            Collection<Orden> ordenCollection = cliente.getOrdenCollection();
-            for (Orden ordenCollectionOrden : ordenCollection) {
-                ordenCollectionOrden.setFkIdCliente(null);
-                ordenCollectionOrden = em.merge(ordenCollectionOrden);
             }
             em.remove(cliente);
             utx.commit();
