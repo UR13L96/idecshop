@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>TeleCable</title>
     </h:head>
@@ -29,7 +30,7 @@
                                     <p:outputLabel for="category" value="Categoría"></p:outputLabel>
                                     <p:selectOneMenu id="category" style="width: 100%">
                                         <f:selectItem itemLabel="- Seleccione -" itemValue="1" />
-                                         <f:selectItem itemLabel="Almacenamiento" itemValue="2" />
+                                        <f:selectItem itemLabel="Almacenamiento" itemValue="2" />
                                         <f:selectItem itemLabel="Celulares" itemValue="3" />
                                         <f:selectItem itemLabel="Laptops" itemValue="4" />
                                         <f:selectItem itemLabel="Impresoras" itemValue="5" />
@@ -50,107 +51,32 @@
                             <h:form style="margin-top: 30px">
                                 <p:panelGrid columns="1">
                                     <p:panelGrid columns="1" layout="grid">
-                                        <p:panel header="Memoria RAM para PC 8GB, DDR4 " style="margin-bottom:20px; border: 1px solid gray!important;">
-                                            <h:panelGrid columns="2" cellpadding="10">
-                                                <p:graphicImage library="images" name="catalogo/ram.jpg" style="width: 150px" />
-                                                <p:panel>
-                                                    <p>
-                                                        <b>Categoría:</b>
-                                                        Almacenamiento
-                                                    </p>
-                                                    <p>
-                                                        <b>Descripción:</b>
-                                                        Memoria RAM para PC ADATA - 8 GB, DDR4, 2133 MHz, Portátil, 260-pin SO-DIMM.
-                                                    </p>
-                                                    <p>
-                                                        <b>Precio:</b>
-                                                        $789.00
-                                                    </p>
-                                                    <div align="right">
-                                                        <p:spinner min="1" size="5"></p:spinner>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
-                                                    </div>
-                                                </p:panel>
-                                            </h:panelGrid>
-                                        </p:panel>
-                                        <p:panel header="HDD portátil Seagate 2TB" style="margin-bottom:20px; border: 1px solid gray!important;">
-                                            <h:panelGrid columns="2" cellpadding="10" style="height: 100%">
-                                                <p:graphicImage library="images" name="catalogo/hdd.jpg" style="height: 100px" />
-                                                <p:panel>
-                                                    <p>
-                                                        <b>Categoría:</b>
-                                                        Almacenamiento
-                                                    </p>
-                                                    <p>
-                                                        <b>Descripción:</b>
-                                                        Seagate Backup Plus Slim Disco duro portátil con respaldo de dispositivos móviles, USB 3.0, 2 TB, plateado 
-                                                    </p>
-                                                    <p>
-                                                        <b>Precio:</b>
-                                                        $1623.00
-                                                    </p>
-                                                    <div align="right">
-                                                        <p:spinner min="1" size="5"></p:spinner>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
-                                                    </div>
-                                                </p:panel>
-                                            </h:panelGrid>
-                                        </p:panel>
-                                    </p:panelGrid>
-                                    <p:panelGrid columns="1" layout="grid">
-                                        <p:panel header="Tarjeta de Memoria 64GB" style="margin-bottom:20px; border: 1px solid gray!important;">
-                                            <h:panelGrid columns="2" cellpadding="10">
-                                                <p:graphicImage library="images" name="catalogo/sd.jpg" style="width: 150px" />
-                                                <p:panel>
-                                                    <p>
-                                                        <b>Categoría:</b>
-                                                        Almacenamiento
-                                                    </p>
-                                                    <p>
-                                                        <b>Descripción:</b>
-                                                        Samsung MB-ME64GA/AM Tarjeta de Memoria microSDHC EVO Select DE 64 GB con Adaptador 
-                                                    </p>
-                                                    <p>
-                                                        <b>Precio:</b>
-                                                        $329.00
-                                                    </p>
-                                                    <div align="right">
-                                                        <p:spinner min="1" size="5"></p:spinner>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
-                                                    </div>
-                                                </p:panel>
-                                            </h:panelGrid>
-                                        </p:panel>
-                                        <p:panel header="USB Kingston 32GB" style="margin-bottom:20px; border: 1px solid gray!important;">
-                                            <h:panelGrid columns="2" cellpadding="10">
-                                                <p:graphicImage library="images" name="catalogo/usb.jpg" style="height: 100px" />
-                                                <p:panel>
-                                                    <p>
-                                                        <b>Categoría:</b>
-                                                        Almacenamiento
-                                                    </p>
-                                                    <p>
-                                                        <b>Descripción:</b>
-                                                        Kingston Digital 32GB 100 G3 USB 3.0 DataTraveler
-                                                        - Compacto y liviano
-                                                        - Garantía ilímitada de por vida
-                                                        - Diseño elegante
-                                                    </p>
-                                                    <p>
-                                                        <b>Precio:</b>
-                                                        $175.00
-                                                    </p>
-                                                    <div align="right">
-                                                        <p:spinner min="1" size="5"></p:spinner>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <p:button value="Agregar" style="margin-top: 16px"></p:button>
-                                                    </div>
-                                                </p:panel>
-                                            </h:panelGrid>
-                                        </p:panel>
+                                        <c:forEach items="#{product.productos}" var="producto" >
+                                            <p:panel header="#{producto.nombre}" style="margin-bottom:20px; border: 1px solid gray!important;">
+                                                <h:panelGrid columns="2" cellpadding="10">
+                                                    <p:graphicImage library="images" name="#{producto.imagen}" style="width: 150px" />
+                                                    <p:panel>
+                                                        <p>
+                                                            <b>Categoría:</b>
+                                                            #{producto.fkIdCategoriaProducto.nombre}
+                                                        </p>
+                                                        <p>
+                                                            <b>Descripción:</b>
+                                                            #{producto.descripcion}
+                                                        </p>
+                                                        <p>
+                                                            <b>Precio:</b>
+                                                            $ #{producto.precio}
+                                                        </p>
+                                                        <div align="right">
+                                                            <p:spinner min="1" max="#{producto.stock}" size="5"></p:spinner>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <p:button value="Agregar" style="margin-top: 16px"></p:button>
+                                                        </div>
+                                                    </p:panel>
+                                                </h:panelGrid>
+                                            </p:panel>
+                                        </c:forEach>
                                     </p:panelGrid>
                                 </p:panelGrid>
                             </h:form>
