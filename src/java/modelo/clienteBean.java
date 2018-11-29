@@ -5,6 +5,8 @@
  */
 package modelo;
 
+
+import General.Validaciones;
 import controlador.ClienteFacade;
 import controlador.ClienteJpaController;
 import entidad.Cliente;
@@ -25,19 +27,29 @@ import javax.servlet.http.HttpSession;
 @Named(value = "cliente")
 @RequestScoped
 public class clienteBean implements Serializable {
+
     private Integer id;
     private String correo;
     private String contrasena;
+    private String contrasena2;
     private String nombre;
     private String apellidos;
     private String telefono;
-    
     ClienteFacade clienteFa;
     FacesContext fc = FacesContext.getCurrentInstance();
     ExternalContext ec = fc.getExternalContext();
     HttpSession sesion;
-    
+    Validaciones validar= new Validaciones();
+
     public clienteBean() {
+    }
+
+    public String getContrasena2() {
+        return contrasena2;
+    }
+
+    public void setContrasena2(String contrasena2) {
+        this.contrasena2 = contrasena2;
     }
 
     public Integer getId() {
@@ -87,64 +99,80 @@ public class clienteBean implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    public void registrar() throws Exception
-    {
-        clienteFa = new ClienteFacade();
-        
-        Cliente cliente = new Cliente(nombre, apellidos, correo, telefono, contrasena);
-        clienteFa.registrar(cliente);
 
-        ec.redirect(ec.getRequestContextPath() + "/faces/iniciar.xhtml");
+    public void registrar() throws Exception {
+        clienteFa = new ClienteFacade();
+        if (validar.valCadena(nombre) == true) {
+            if (validar.valCadena(apellidos) == true) {
+                if (validar.valEmail(correo) == true) {
+                    if (validar.valNumEntero(telefono) == true) {
+                        if (contrasena.equals(contrasena2) == true) {
+                            Cliente cliente = new Cliente(nombre, apellidos, correo, telefono, contrasena);
+                            clienteFa.registrar(cliente);
+
+                            ec.redirect(ec.getRequestContextPath() + "/faces/iniciar.xhtml");
+                        } else {
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "La contraseña no coincide"));
+                        }
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El telefono debe de ser numerico"));
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El correo esta mal el formato es así usuario@gmail.com"));
+                }
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El apellido esta mal"));
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El nombres esta mal"));
+        }
     }
-    
-     public void autenticar() throws IOException{
+
+    public void autenticar() throws IOException {
         clienteFa = new ClienteFacade();
         Cliente cliente = clienteFa.buscarPorCorreo(correo);
-        
-        if(cliente!=null){
-            if(cliente.getContrasena().equals(contrasena)){
+
+        if (cliente != null) {
+            if (cliente.getContrasena().equals(contrasena)) {
                 cambiaSession();
-                
+
                 sesion = (HttpSession) ec.getSession(false);
                 sesion.setAttribute("validado", true);
-                
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "BIENVENIDO", "BIENVENIDO" + cliente.getNombre()));
                 ec.redirect(ec.getRequestContextPath() + "/faces/cctv.xhtml");
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"La contraseña no coincide","La contraseña no coincide"));
-            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La contraseña no coincide", "La contraseña no coincide"));
+
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"El usuario no existe","El usuario no existe"));                
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario no existe", "El usuario no existe"));
     }
-     
+
     private void cambiaSession() {
-       sesion = (HttpSession) ec.getSession(false);
-       System.out.println("Sesión nueva: " + sesion.isNew());
-       System.out.println("Id sesión: " + sesion.getId());
+        sesion = (HttpSession) ec.getSession(false);
+        System.out.println("Sesión nueva: " + sesion.isNew());
+        System.out.println("Id sesión: " + sesion.getId());
 
-       sesion.invalidate();
+        sesion.invalidate();
 
-       sesion = (HttpSession) ec.getSession(true);
-       System.out.println("Sesión nueva: " + sesion.isNew());
-       System.out.println("Id sesión: " + sesion.getId());
-   }
-    
+        sesion = (HttpSession) ec.getSession(true);
+        System.out.println("Sesión nueva: " + sesion.isNew());
+        System.out.println("Id sesión: " + sesion.getId());
+    }
+
     public void validaPagina() throws IOException {
         HttpSession session = (HttpSession) ec.getSession(false);
         if (!(boolean) session.getAttribute("validado")) {
             ec.redirect(ec.getRequestContextPath() + "/faces/index.xhtml");
-        }
-        else{
+        } else {
             fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "Información"));
         }
     }
-    
-    public boolean clienteValidado()
-    {
+
+    public boolean clienteValidado() {
         HttpSession session = (HttpSession) ec.getSession(true);
         return session.getAttribute("validado") != null;
     }
-    
+
     public void cerrarSesion() throws IOException {
         sesion = (HttpSession) ec.getSession(false);
         sesion.invalidate();

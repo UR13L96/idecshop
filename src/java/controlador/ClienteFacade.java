@@ -5,23 +5,21 @@
  */
 package controlador;
 
+
 import entidad.Cliente;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author uriel
- */
 public class ClienteFacade {
+  
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("idecshopPU");
     private ClienteJpaController clienteJpa = new ClienteJpaController(emf);
-    
-    Cliente cliente;
+     Cliente cliente;
+   
 
     public ClienteFacade() {
     }
-    
+     
     public void registrar(Cliente cliente) throws Exception{
         cliente.setNombre(cliente.getNombre());
         cliente.setApellidos(cliente.getApellidos());

@@ -38,7 +38,7 @@
                             </h:outputLabel>
                             Telefono:
                             <h:outputLabel>
-                                <h:inputText id="tel" required="true" value="#{cliente.telefono}">
+                                <h:inputText id="tel" required="true" maxlength="10" value="#{cliente.telefono}">
                                 </h:inputText>
                             </h:outputLabel>
                             Correo:
@@ -49,6 +49,11 @@
                             Contraseña:
                             <h:outputLabel>
                                 <p:password id="pwd"  label="contraseña" required="true" value="#{cliente.contrasena}" />
+                            </h:outputLabel>
+                            
+                            Confirmar contraseña:
+                            <h:outputLabel>
+                                <p:password id="pwd2"  label="confirmarc" required="true" value="#{cliente.contrasena2}" />
                             </h:outputLabel>
                         </h:panelGrid>
                         <center>
