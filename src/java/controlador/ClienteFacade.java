@@ -33,4 +33,11 @@ public class ClienteFacade {
         cliente = clienteJpa.encontrarUsuarioxLogin(correo);
         return cliente;
     }
+    
+     public Cliente buscarPorid(int id) {
+        cliente = clienteJpa.encontrarUsuarioxId(id);
+        return cliente;
+    }
+    
+     
 }
