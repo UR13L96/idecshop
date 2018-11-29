@@ -12,13 +12,21 @@ import controlador.ClienteJpaController;
 import entidad.Cliente;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -107,9 +115,10 @@ public class clienteBean implements Serializable {
                 if (validar.valEmail(correo) == true) {
                     if (validar.valNumEntero(telefono) == true) {
                         if (contrasena.equals(contrasena2) == true) {
+                            contrasena=(encripta(contrasena));
                             Cliente cliente = new Cliente(nombre, apellidos, correo, telefono, contrasena);
                             clienteFa.registrar(cliente);
-
+                         
                             ec.redirect(ec.getRequestContextPath() + "/faces/iniciar.xhtml");
                         } else {
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "La contraseña no coincide"));
@@ -127,13 +136,13 @@ public class clienteBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El nombres esta mal"));
         }
     }
-
     public void autenticar() throws IOException {
         clienteFa = new ClienteFacade();
         Cliente cliente = clienteFa.buscarPorCorreo(correo);
 
         if (cliente != null) {
-            if (cliente.getContrasena().equals(contrasena)) {
+              String contraDesen = Desencriptar(cliente.getContrasena());
+            if (contraDesen.equals(contrasena)) {
                 cambiaSession();
 
                 sesion = (HttpSession) ec.getSession(false);
@@ -183,5 +192,57 @@ public class clienteBean implements Serializable {
         else{
             ec.redirect(ec.getRequestContextPath() + "/faces/catalogo.xhtml");
         }
+    }
+     public String encripta(String cadena) {
+        String texto = cadena;
+        System.out.println("Esta es sin encriptar: " + texto);
+        String secretKey = "qualityinfosolutions"; //llave para encriptar datos
+        String base64EncryptedString = "";
+
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+            Cipher cipher = Cipher.getInstance("DESede");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+
+            byte[] plainTextBytes = texto.getBytes("utf-8");
+            byte[] buf = cipher.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            base64EncryptedString = new String(base64Bytes);
+
+        } catch (Exception ex) {
+        }
+        System.out.println("Esta es encriptada " + base64EncryptedString);
+        return base64EncryptedString;
+    }
+
+    public String Desencriptar(String textoEncriptado) {
+        String secretKey = "qualityinfosolutions"; //llave para desenciptar datos
+        String base64EncryptedString = "";
+
+        try {
+            byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+
+            byte[] plainText = decipher.doFinal(message);
+
+            base64EncryptedString = new String(plainText, "UTF-8");
+
+            System.out.println("Esta es desencriptada 1" + base64EncryptedString);
+        } catch (Exception ex) {
+            System.out.println("Esta es desencriptada 2" + base64EncryptedString);
+        }
+        System.out.println("Esta es desencriptada 12" + base64EncryptedString);
+        return base64EncryptedString;
     }
 }
