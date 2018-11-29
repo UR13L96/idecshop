@@ -17,6 +17,9 @@ import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -139,13 +142,17 @@ public class clienteBean implements Serializable {
     public void autenticar() throws IOException {
         clienteFa = new ClienteFacade();
         Cliente cliente = clienteFa.buscarPorCorreo(correo);
-
+        ArrayList<Carrito> carrito = new ArrayList();
+        
         if (cliente != null) {
               String contraDesen = Desencriptar(cliente.getContrasena());
             if (contraDesen.equals(contrasena)) {
                 cambiaSession();
 
                 sesion = (HttpSession) ec.getSession(false);
+                sesion.setAttribute("validado", true);
+                sesion.setAttribute("carrito", carrito);
+                
                 sesion.setAttribute("cliente_id",cliente.getId());
                 System.out.println(sesion.getAttribute("cliente_id"));
                 id_cliente=(int)sesion.getAttribute("cliente_id");
