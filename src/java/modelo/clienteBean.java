@@ -178,4 +178,15 @@ public class clienteBean implements Serializable {
         sesion.invalidate();
         ec.redirect(ec.getRequestContextPath() + "/faces/index.xhtml");
     }
+    
+    public void catalogo() throws IOException
+    {
+        HttpSession session = (HttpSession) ec.getSession(false);
+        if (session.getAttribute("validado") != null) {
+            ec.redirect(ec.getRequestContextPath() + "/faces/carrito.xhtml");
+        }
+        else{
+            ec.redirect(ec.getRequestContextPath() + "/faces/catalogo.xhtml");
+        }
+    }
 }

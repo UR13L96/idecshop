@@ -6,6 +6,7 @@
 package controlador;
 
 import entidad.Producto;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -23,4 +24,13 @@ public class ProductoFacade {
         
     }
     
+    public List<Producto> productosConStock() {
+        List<Producto> productos = productoJpa.findProductoEntities();
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getStock() == 0) {
+                productos.remove(i);
+            }
+        }
+        return productos;
+    }
 }
