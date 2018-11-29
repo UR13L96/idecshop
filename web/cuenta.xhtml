@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      
+        <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+               
+                     <center>
+                                <h1>Cuenta</h1>  
+                                <br/>
+                                  </center>
+                <p:panelGrid columns="2" layout="grid"  > 
+                     <p:panel>
+                         <center>
+                            <p:graphicImage  library="images" name="usuario.jpg" style="width:30%; height: 30%" />
+                            </center>
+                   </p:panel>
+                     <p:panel>        
+                 
+                    <h:form>
+                       
+                        
+                        <h:panelGrid columns="2" bgcolor="#F8F8FF" >
+                            Nombre
+                               <h:outputLabel>
+                                   <h2> <h:outputText value="#{cuenta.obtenerCuenta().nombre}"></h:outputText></h2>
+                             
+                            </h:outputLabel>
+                            Apellidos:
+                            <h:outputLabel>
+                                <h2> <h:outputText value="#{cuenta.obtenerCuenta().apellidos}"></h:outputText></h2>
+                            </h:outputLabel>
+                          Correo:
+                            <h:outputLabel>
+                                <h2> <h:outputText value="#{cuenta.obtenerCuenta().correo}"></h:outputText></h2>
+                                 </h:outputLabel>
+                                 Telefono:
+                            <h:outputLabel>
+                                <h2> <h:outputText value="#{cuenta.obtenerCuenta().telefono}"></h:outputText></h2>
+                            </h:outputLabel>
+                                
+                               
+                             
+                        </h:panelGrid>
+                     
+                    </h:form>
+                                
+               </p:panel>
+                </p:panelGrid>
+                   
+            </ui:define>
+
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

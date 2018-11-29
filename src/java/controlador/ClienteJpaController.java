@@ -61,6 +61,18 @@ public class ClienteJpaController implements Serializable {
         }
         return null;
     }
+    
+    public Cliente encontrarUsuarioxId(int id){
+        EntityManager em = null;
+        em = getEntityManager();
+        Query q = em.createNamedQuery("Cliente.findById", Cliente.class).setParameter("id", id);
+        List<Cliente> listado = q.getResultList();
+        if(!listado.isEmpty()){
+            return listado.get(0);
+        }
+        return null;
+    }
+    
 
     public void edit(Cliente cliente) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;

@@ -40,7 +40,7 @@ public class clienteBean implements Serializable {
     ExternalContext ec = fc.getExternalContext();
     HttpSession sesion;
     Validaciones validar= new Validaciones();
-
+    int id_cliente;
     public clienteBean() {
     }
 
@@ -137,7 +137,10 @@ public class clienteBean implements Serializable {
                 cambiaSession();
 
                 sesion = (HttpSession) ec.getSession(false);
-                sesion.setAttribute("validado", true);
+                sesion.setAttribute("cliente_id",cliente.getId());
+                System.out.println(sesion.getAttribute("cliente_id"));
+                id_cliente=(int)sesion.getAttribute("cliente_id");
+                  
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "BIENVENIDO", "BIENVENIDO" + cliente.getNombre()));
                 ec.redirect(ec.getRequestContextPath() + "/faces/cctv.xhtml");
             }
@@ -146,7 +149,6 @@ public class clienteBean implements Serializable {
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario no existe", "El usuario no existe"));
     }
-
     private void cambiaSession() {
         sesion = (HttpSession) ec.getSession(false);
         System.out.println("Sesión nueva: " + sesion.isNew());
@@ -159,18 +161,11 @@ public class clienteBean implements Serializable {
         System.out.println("Id sesión: " + sesion.getId());
     }
 
-    public void validaPagina() throws IOException {
-        HttpSession session = (HttpSession) ec.getSession(false);
-        if (!(boolean) session.getAttribute("validado")) {
-            ec.redirect(ec.getRequestContextPath() + "/faces/index.xhtml");
-        } else {
-            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "Información"));
-        }
-    }
-
+    
     public boolean clienteValidado() {
         HttpSession session = (HttpSession) ec.getSession(true);
-        return session.getAttribute("validado") != null;
+        return session.getAttribute("cliente_id") != null;
+       
     }
 
     public void cerrarSesion() throws IOException {
@@ -182,7 +177,7 @@ public class clienteBean implements Serializable {
     public void catalogo() throws IOException
     {
         HttpSession session = (HttpSession) ec.getSession(false);
-        if (session.getAttribute("validado") != null) {
+        if (session.getAttribute("cliente_id") != null) {
             ec.redirect(ec.getRequestContextPath() + "/faces/carrito.xhtml");
         }
         else{
