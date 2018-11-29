@@ -51,32 +51,39 @@
                             <h:form style="margin-top: 30px">
                                 <p:panelGrid columns="1">
                                     <p:panelGrid columns="1" layout="grid">
-                                        <c:forEach items="#{product.productos}" var="producto" >
-                                            <p:panel header="#{producto.nombre}" style="margin-bottom:20px; border: 1px solid gray!important;">
-                                                <h:panelGrid columns="2" cellpadding="10">
-                                                    <p:graphicImage library="images" name="#{producto.imagen}" style="width: 150px" />
-                                                    <p:panel>
-                                                        <p>
-                                                            <b>Categoría:</b>
-                                                            #{producto.fkIdCategoriaProducto.nombre}
-                                                        </p>
-                                                        <p>
-                                                            <b>Descripción:</b>
-                                                            #{producto.descripcion}
-                                                        </p>
-                                                        <p>
-                                                            <b>Precio:</b>
-                                                            $ #{producto.precio}
-                                                        </p>
-                                                        <div align="right">
-                                                            <p:spinner min="1" max="#{producto.stock}" size="5"></p:spinner>
-                                                            &nbsp;&nbsp;&nbsp;
-                                                            <p:button value="Agregar" style="margin-top: 16px"></p:button>
-                                                        </div>
-                                                    </p:panel>
-                                                </h:panelGrid>
-                                            </p:panel>
-                                        </c:forEach>
+                                        <p:dataTable value="#{producto.productos}" var="prod" >
+                                            <p:column>
+                                                <p:panel header="#{prod.nombre}" style="margin-bottom:20px; border: 1px solid gray!important;">
+                                                    <h:panelGrid columns="2" cellpadding="10">
+                                                        <p:graphicImage library="images" name="#{prod.imagen}" style="width: 150px" />
+                                                        <p:panel>
+                                                            <p>
+                                                                <b>Categoría:</b>
+                                                                #{prod.fkIdCategoriaProducto.nombre}
+                                                            </p>
+                                                            <p>
+                                                                <b>Descripción:</b>
+                                                                #{prod.descripcion}
+                                                            </p>
+                                                            <p>
+                                                                <b>Precio:</b>
+                                                                $ #{prod.precio}
+                                                            </p>
+                                                            <div align="right">
+                                                                <p:spinner min="1" max="#{prod.stock}" binding="#{input}" size="5"></p:spinner>
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                <p:commandButton value="Agregar" 
+                                                                                 style="margin-top: 16px"
+                                                                                 action="#{carrito.agregarAlCarrito(prod.id, input.value, prod.precio, prod.nombre)}"
+                                                                                 update="tabla">
+                                                                    
+                                                                </p:commandButton>
+                                                            </div>
+                                                        </p:panel>
+                                                    </h:panelGrid>
+                                                </p:panel>
+                                            </p:column>
+                                        </p:dataTable>
                                     </p:panelGrid>
                                 </p:panelGrid>
                             </h:form>
@@ -88,7 +95,7 @@
                             <span>
                                 <b>Artículos en carrito:</b>
                             </span>
-                            <h:form style="margin-top: 30px">
+                            <h:form style="margin-top: 30px" id="tabla">
                                 <p:panelGrid style="margin-top:20px">
                                     <f:facet name="header">
                                         <p:row>
@@ -96,32 +103,15 @@
                                             <p:column>Artículo</p:column>
                                             <p:column>Precio</p:column>
                                         </p:row>
-
                                     </f:facet>
-
-                                    <p:row>
-                                        <p:column>2</p:column>
-                                        <p:column>Memoria RAM para PC 8GB, DDR4</p:column>
-                                        <p:column>$789.00</p:column>
-                                    </p:row>
                                     
-                                    <p:row>
-                                        <p:column>3</p:column>
-                                        <p:column>Ratón inalámbrico óptico</p:column>
-                                        <p:column>$129.00</p:column>
-                                    </p:row>
-                                    
-                                    <p:row>
-                                        <p:column>1</p:column>
-                                        <p:column>Tarjeta de Memoria 64GB</p:column>
-                                        <p:column>$329.00</p:column>
-                                    </p:row>
-                                    
-                                    <p:row>
-                                        <p:column>1</p:column>
-                                        <p:column>Teclado Logitech G213</p:column>
-                                        <p:column>$225.00</p:column>
-                                    </p:row>
+                                    <p:repeat value="#{carrito.obtenerCarrito()}" var="prod">
+                                        <p:row>
+                                            <p:column>#{prod.cantidad}</p:column>
+                                            <p:column>${prod.nombre}</p:column>
+                                            <p:column>$#{prod.precio}</p:column>
+                                        </p:row>
+                                    </p:repeat>
 
                                     <f:facet name="footer">
                                         <p:row>
@@ -129,14 +119,16 @@
                                                 Total
                                             </p:column>
                                             <p:column>
-                                                $2264.00
+                                                $#{carrito.calculaTotal()}
                                             </p:column>
                                         </p:row>
                                     </f:facet>
                                 </p:panelGrid>
                             </h:form>
                             <div align="right">
-                                <p:button value="Confirmar compra" style="margin-top: 16px"></p:button>
+                                <p:commandButton action="pagar" value="Confirmar compra" style="margin-top: 16px">
+                                    
+                                </p:commandButton>
                             </div>
                         </p:panel>
                     </p:column>

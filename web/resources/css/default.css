@@ -167,3 +167,8 @@ a:link:hover, a:visited:hover  {
 .top-alignment {
      vertical-align: top;
 }
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th {
+    padding: 0 !important;
+    border-style: none !important;
+}

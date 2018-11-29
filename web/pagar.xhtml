@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TeleCable</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+            
+            <ui:define name="content">
+                <div align="center">
+                    <h1>Confirmar compra</h1>
+                </div>                
+                
+                <p:panelGrid layout="grid" columns="2">
+                    <p:panel>
+                        <span>
+                            <b>Artículos en carrito:</b>
+                        </span>
+                        <h:form style="margin-top: 30px" id="tabla">
+                            <p:panelGrid style="margin-top:20px">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column>Cant.</p:column>
+                                        <p:column>Artículo</p:column>
+                                        <p:column>Precio</p:column>
+                                    </p:row>
+                                </f:facet>
+
+                                <p:repeat value="#{carrito.obtenerCarrito()}" var="prod">
+                                    <p:row>
+                                        <p:column>#{prod.cantidad}</p:column>
+                                        <p:column>${prod.nombre}</p:column>
+                                        <p:column>$#{prod.precio}</p:column>
+                                    </p:row>
+                                </p:repeat>
+
+                                <f:facet name="footer">
+                                    <p:row>
+                                        <p:column  colspan="2" style="text-align: right">
+                                            Total
+                                        </p:column>
+                                        <p:column>
+                                            $#{carrito.calculaTotal()}
+                                        </p:column>
+                                    </p:row>
+                                </f:facet>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    
+                    <p:panel>
+                        <h:form>
+                            <p:panelGrid layout="grid" columns="2">
+                                <p:panel>
+                                    <p:outputLabel for="name" value="Nombre del titular:"></p:outputLabel>
+                                    <br></br>
+                                    <br></br>
+                                    <p:inputText id="name" style="width: 100%"></p:inputText>
+                                    <br></br>
+                                    <br></br>
+                                    <p:outputLabel value="Fecha de expiración:"></p:outputLabel>
+                                    <br></br>
+                                    <br></br>
+                                    <p:inputText id="month" style="width: 40%"></p:inputText>
+                                    <p:watermark for="month" value="Mes"></p:watermark>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <p:inputText id="year" style="width: 40%"></p:inputText>
+                                    <p:watermark for="year" value="Año"></p:watermark>
+                                </p:panel>
+                                <p:panel>
+                                    <p:outputLabel for="number" value="Número de tarjeta:"></p:outputLabel>
+                                    <br></br>
+                                    <br></br>
+                                    <p:inputText id="number" style="width: 100%"></p:inputText>
+                                    <br></br>
+                                    <br></br>
+                                    <p:outputLabel for="code" value="Código de seguridad:"></p:outputLabel>
+                                    <br></br>
+                                    <br></br>
+                                    <p:inputText id="code" style="width: 30%"></p:inputText>
+                                </p:panel>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+                </p:panelGrid>
+                
+                <div align="center">
+                    <p:button value="Confirmar compra" style="margin-top: 16px"></p:button>
+                </div>
+            </ui:define>
+                
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

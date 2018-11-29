@@ -12,6 +12,9 @@ import controlador.ClienteJpaController;
 import entidad.Cliente;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -131,13 +134,16 @@ public class clienteBean implements Serializable {
     public void autenticar() throws IOException {
         clienteFa = new ClienteFacade();
         Cliente cliente = clienteFa.buscarPorCorreo(correo);
-
+        ArrayList<Carrito> carrito = new ArrayList();
+        
         if (cliente != null) {
             if (cliente.getContrasena().equals(contrasena)) {
                 cambiaSession();
 
                 sesion = (HttpSession) ec.getSession(false);
                 sesion.setAttribute("validado", true);
+                sesion.setAttribute("carrito", carrito);
+                
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "BIENVENIDO", "BIENVENIDO" + cliente.getNombre()));
                 ec.redirect(ec.getRequestContextPath() + "/faces/cctv.xhtml");
             }
