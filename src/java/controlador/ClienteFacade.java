@@ -7,19 +7,24 @@ package controlador;
 
 
 import entidad.Cliente;
+import entidad.Contacto;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class ClienteFacade {
-  
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("idecshopPU");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("idecshopPU");
     private ClienteJpaController clienteJpa = new ClienteJpaController(emf);
      Cliente cliente;
    
 
     public ClienteFacade() {
     }
-     
+    private EntityManagerFactory em= Persistence.createEntityManagerFactory("idecshopPU");
+     private ContactoJpaController jpa = new ContactoJpaController (em); 
+    
+     public void insertaJPA(Contacto s) throws Exception{
+        jpa.create(s);
+    }
     public void registrar(Cliente cliente) throws Exception{
         cliente.setNombre(cliente.getNombre());
         cliente.setApellidos(cliente.getApellidos());

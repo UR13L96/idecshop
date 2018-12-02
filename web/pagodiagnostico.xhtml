@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TeleCable</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/master.xhtml">
+            <ui:define name="top">
+                <ui:include src="templates/header.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <div align="center">
+                    <h1>Confirmar compra</h1>
+                </div>                
+                <h:form id="PagForm">
+                    <p:messages id="msjPagForm" closable="true"/>
+                    <p:panelGrid layout="grid" columns="2">
+                        <p:panel>
+                            <span>
+                                <b>Artículos en carrito:</b>
+                            </span>
+                            <h:form style="margin-top: 30px">
+                                <p:panelGrid style="margin-top:20px">
+                                    <f:facet name="header">
+                                        <p:row>
+                                            <p:column>Cant.</p:column>
+                                            <p:column>Artículo</p:column>
+                                            <p:column>Precio</p:column>
+                                        </p:row>
+
+                                    </f:facet>
+
+                                    <p:row>
+                                        <p:column>01</p:column>
+                                        <p:column>Diagnostico</p:column>
+                                        <p:column>$200.00</p:column>
+                                    </p:row>
+
+
+                                    <f:facet name="footer">
+                                        <p:row>
+                                            <p:column  colspan="2" style="text-align: right">
+                                                Total
+                                            </p:column>
+                                            <p:column>
+                                                $200.00
+                                            </p:column>
+                                        </p:row>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:panel>
+
+                        <p:panel>
+                            <h:form>
+                                <p:panelGrid layout="grid" columns="2">
+                                    <p:panel>
+                                        <p:outputLabel for="name" value="Nombre del titular:"></p:outputLabel>
+                                        <br></br>
+                                        <br></br>
+                                        <p:inputText id="name" style="width: 100%"
+                                                     required="true" value="" requiredMessage="Nombre, no puede estar vacio"
+                                                     validatorMessage="Nombre no fue llenado correctamente">
+                                            <f:validateLength minimum="3" maximum="16"/>
+                                            <f:validateRegex pattern="^[a-zA-Z  ]+$"/>
+                                            <p:tooltip for="name" value="El Nombre debe de contener solo letras"/>
+                                        </p:inputText>
+                                        <br></br>
+                                        <br></br>
+                                        <p:outputLabel value="Fecha de expiración:"></p:outputLabel>
+                                        <br></br>
+                                        <br></br>
+                                        <p:inputText id="month" style="width: 40%"
+                                                     requiredMessage="Mes, no puede estar vacio"
+                                                     validatorMessage="Mes no fue llenado correctamente">
+                                            <f:validateLength minimum="1" maximum="2"/>
+                                            <f:validateRegex pattern="^[0-9]+$"/>
+                                            <p:tooltip for="month" value="El Mes debe contener solo numeros"/>
+                                        </p:inputText>
+                                        <p:watermark for="month" value="Mes"></p:watermark>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <p:inputText id="year" style="width: 40%" requiredMessage="Año, no puede estar vacio"
+                                                     validatorMessage="Año no fue llenado correctamente">
+                                            <f:validateLength minimum="2" maximum="2"/>
+                                            <f:validateRegex pattern="^[0-9]+$"/>
+                                            <p:tooltip for="year" value="El Año debe de contener solo numeros"/>
+                                        </p:inputText>
+                                        <p:watermark for="year" value="Año"></p:watermark>
+                                    </p:panel>
+                                    <p:panel>
+                                        <p:outputLabel for="number" value="Número de tarjeta:"></p:outputLabel>
+                                        <br></br>
+                                        <br></br>
+                                        <p:inputText id="number" style="width: 100%" requiredMessage="Numero de tarjeta, no puede estar vacio"
+                                                     validatorMessage="El numero de tarjeta no fue llenado correctamente">
+                                            <f:validateLength minimum="16" maximum="16"/>
+                                            <f:validateRegex pattern="^[0-9]+$"/>
+                                            <p:tooltip for="number" value="El numero de tarjeta debe de contener solo numeros"/>
+                                        </p:inputText>
+                                        <br></br>
+                                        <br></br>
+                                        <p:outputLabel for="code" value="Código de seguridad:"></p:outputLabel>
+                                        <br></br>
+                                        <br></br>
+                                        <p:inputText id="code" style="width: 30%" requiredMessage="El codigo, no puede estar vacio"
+                                                     validatorMessage="El codigo no fue llenado correctamente">
+                                            <f:validateLength minimum="3" maximum="3"/>
+                                            <f:validateRegex pattern="^[0-9]+$"/>
+                                            <p:tooltip for="code" value="El codigo debe de contener solo numeros"/>
+                                        </p:inputText>
+                                    </p:panel>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:panel>
+                    </p:panelGrid>
+                </h:form>
+                <h:form>
+                        <h:panelGroup>
+                            <p:commandButton action="confirmacion" value="Confirmar compra" ajax="false" />
+                        </h:panelGroup> 
+                    </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                <ui:include src="templates/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

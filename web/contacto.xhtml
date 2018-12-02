@@ -16,31 +16,37 @@
 
             <ui:define name="content">
                 <div align="center">
-                     <hr />
+                    <hr />
                     <h1>IDEC Toluca agradece tu preferencia </h1>
                     <h4>Para nosotros es importante escuchar a nuestros clientes, por ello este </h4>
                     <h4>espacio es para ti, con gusto atenderemos tus dudas quejas o sugerencias</h4>
                     <h4>Muy pronto nos comunicaremos contigo</h4>
-                     <hr />
-                    <h:form>
+                    <hr />
+                    <h:form id="ContacForm">
+                        <p:messages id="msjContacForm" closable="true"/>
                         <h:panelGrid columns="1" >
                             Correo:
                             <h:outputLabel>
-                                <h:inputText id="correo" required="true" value="" validatorMessage="Campo requerido">
-                                    <f:validateLength minimum="10" maximum="16"/>
-                                </h:inputText>
-                            </h:outputLabel>
-                            Nombre:
-                            <h:outputLabel>
-                                <h:inputText id="nombre" required="true" value="" validatorMessage="Campo requerido">
-                                    <f:validateLength minimum="10" maximum="16"/>
+                                <h:inputText id="correo" required="true" requiredMessage="Correo, no puede estar vacio" value="#{contactoBean.correo}" 
+                                             validatorMessage="Correo no fue llenado correctamente">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                    <p:tooltip for="correo" value="El correo debe ser llenado bajo el formato adecuado"/>
                                 </h:inputText>
                             </h:outputLabel>
                             Mensaje:
-                            <p:inputTextarea rows="10" cols="50"  queryDelay="750" minQueryLength="4" />
+                            <h:outputLabel>
+                                <p:inputTextarea id="msj" required="true" requiredMessage="Mensaje, no puede estar vacio" value="#{contactoBean.mensaje}"
+                                                 rows="10" cols="50"  queryDelay="750" minQueryLength="4" 
+                                                 validatorMessage="Mensaje no fue llenado correctamente">
+                                    <f:validateLength minimum="3" maximum="130"/>
+                                    <f:validateRegex pattern="^[0-9a-zA-Z ]+$"/>
+                                    <p:tooltip for="msj" value="El mensaje solo puede contener numeros o letras"/>
+                                </p:inputTextarea>
+                            </h:outputLabel>
+                            
                             <h:panelGroup>
-                                <h:commandButton value="Enviar"  />
-        
+                                <p:commandButton id="enviar" value="Enviar"  ajax="false" action="#{contactoBean.enviar}" />
+
                             </h:panelGroup>
 
 
