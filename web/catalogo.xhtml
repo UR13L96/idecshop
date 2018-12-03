@@ -36,8 +36,15 @@
                                     <f:selectItem itemLabel="Laptops" itemValue="4" />
                                     <f:selectItem itemLabel="Impresoras" itemValue="5" />
                                 </p:selectOneMenu>
-                                <p:outputLabel for="name" value="Nombre"></p:outputLabel>
-                                <p:inputText id="name" style="width: 100%"></p:inputText>
+                                <p:outputLabel for="name" value="Nombre">
+                              <p:inputText id="name" style="width: 100%"
+                                        validatorMessage="Nombre no fue llenado correctamente">
+                                            <f:validateLength minimum="3" maximum="20"/>
+                                            <f:validateRegex pattern="^[a-zA-Z  ]+$"/>
+                                            <p:tooltip for="name" value="El Nombre debe de contener solo letras"/>
+                                        </p:inputText>
+                                
+                                </p:outputLabel>
                                 <p:commandButton value="Buscar" style="margin-top: 16px"></p:commandButton>
                             </p:panelGrid>
                         </h:form>

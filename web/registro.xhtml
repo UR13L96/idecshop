@@ -20,7 +20,7 @@
                         <center>
                             <h1>REGISTRO</h1>  
                             <br/>
-                            <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+                            <p:messages id="messages" closable="true" showDetail="true" autoUpdate="true"/>
                             <p:graphicImage  library="images" name="registro.png" style="width:10%; height: 10%" />
                         </center>
                         <h:panelGrid columns="2" bgcolor="#F8F8FF" >
@@ -28,33 +28,51 @@
                             
                             Nombre:
                             <h:outputLabel>
-                                <h:inputText id="nom" required="true" value="#{cliente.nombre}">
-                                </h:inputText>
+                                <p:inputText id="nom" value="#{cliente.nombre}" required="true" style="width: 100%" requiredMessage="Nombre, no puede estar vacio"
+                                                     validatorMessage="Nombre no fue llenado correctamente">
+                                    <f:validateLength minimum="3" maximum="50"/> 
+                                    <p:tooltip for="nom" value="El Nombre debe de contener solo letras"/>
+                                </p:inputText>
                             </h:outputLabel>
                             Apellidos:
-                            <h:outputLabel>
-                                <h:inputText id="apP" required="true" value="#{cliente.apellidos}">
-                                </h:inputText>
-                            </h:outputLabel>
+                            <p:outputLabel>
+                                <p:inputText id="apP" required="true" value="#{cliente.apellidos}" style="width: 100%" requiredMessage="Apellidos, no puede estar vacio"
+                                                     validatorMessage="Apellidos no fue llenado correctamente">
+                                    <f:validateLength minimum="3" maximum="50"/> 
+                                         <p:tooltip for="apP" value="El Apellido debe de contener solo letras"/>
+                                </p:inputText>
+                               
+                            </p:outputLabel>
                             Telefono:
-                            <h:outputLabel>
-                                <h:inputText id="tel" required="true" maxlength="10" value="#{cliente.telefono}">
-                                </h:inputText>
-                            </h:outputLabel>
+                            <p:outputLabel>
+                                <p:inputText id="tel" style="width: 100%" required="true" value="#{cliente.telefono}" requiredMessage="Telefono, no puede estar vacio"
+                                                     validatorMessage="Telefono no fue llenado correctamente">
+                                    <f:validateLength minimum="10" maximum="12"/> 
+                                            <p:tooltip for="tel" value="El telefono debe contener solo números"/>
+                                </p:inputText>
+                            </p:outputLabel>
+                            
                             Correo:
-                            <h:outputLabel>
-                                <h:inputText id="correo" required="true" value="#{cliente.correo}">
-                                </h:inputText>
-                            </h:outputLabel>
+                            <p:outputLabel>
+                                <p:inputText id="correo" style="width: 100%" required="true" value="#{cliente.correo}" requiredMessage="correo, no puede estar vacio"
+                                                     validatorMessage="Nombre no fue llenado correctamente">
+                              
+                                    <p:tooltip for="correo" value="El correo debe ser llenado bajo el formato adecuado"/>
+                            
+                                </p:inputText>
+                   
+                            </p:outputLabel>
                             Contraseña:
-                            <h:outputLabel>
+                            <p:outputLabel>
                                 <p:password id="pwd"  label="contraseña" required="true" value="#{cliente.contrasena}" />
-                            </h:outputLabel>
+                                <p:tooltip for="pwd" value="la contraseña no puede estar vacia"/>
+                            </p:outputLabel>
                             
                             Confirmar contraseña:
-                            <h:outputLabel>
+                            <p:outputLabel>
                                 <p:password id="pwd2"  label="confirmarc" required="true" value="#{cliente.contrasena2}" />
-                            </h:outputLabel>
+                                   <p:tooltip for="pwd2" value="la contraseña no puede estar vacia"/>
+                            </p:outputLabel>
                         </h:panelGrid>
                         <center>
                             <br/>

@@ -5,9 +5,11 @@
  */
 package modelo;
 
+import General.Validaciones;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -21,11 +23,11 @@ import javax.servlet.http.HttpSession;
 public class carritoBean {
     private ArrayList<Carrito> carrito = null;
     private double total;
-    
+    Validaciones validar= new Validaciones();
     HttpSession sesion;
     FacesContext fc = FacesContext.getCurrentInstance();
     ExternalContext ec = fc.getExternalContext();
-    
+   
     
     /**
      * Creates a new instance of carritoBean
@@ -35,12 +37,19 @@ public class carritoBean {
     
     public void agregarAlCarrito(int id, int cantidad, double precio, String nombre)
     {
+           
         sesion = (HttpSession) ec.getSession(false);
         carrito = (ArrayList<Carrito>)sesion.getAttribute("carrito");
         
         Carrito car = new Carrito(id, cantidad, precio, nombre);
-        carrito.add(car);
+   String cant;
+   cant=String.valueOf(car.getCantidad());
+         if (validar.valNumEntero(cant) == true) {
+             carrito.add(car);
         sesion.setAttribute("carrito", carrito);
+         }else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Ingresa una cantidad"));
+                    }
     }
     
     public ArrayList<Carrito> obtenerCarrito()
