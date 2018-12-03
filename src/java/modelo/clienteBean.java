@@ -46,12 +46,14 @@ public class clienteBean implements Serializable {
     private String nombre;
     private String apellidos;
     private String telefono;
+    
     ClienteFacade clienteFa;
     FacesContext fc = FacesContext.getCurrentInstance();
     ExternalContext ec = fc.getExternalContext();
     HttpSession sesion;
     Validaciones validar= new Validaciones();
     int id_cliente;
+    
     public clienteBean() {
     }
 
@@ -119,26 +121,57 @@ public class clienteBean implements Serializable {
                     if (validar.valNumEntero(telefono) == true) {
                         if (contrasena.equals(contrasena2) == true) {
                             contrasena=(encripta(contrasena));
-                            Cliente cliente = new Cliente(nombre, apellidos, correo, telefono, contrasena);
+                            Cliente cliente = new Cliente(
+                                    nombre, 
+                                    apellidos, 
+                                    correo, 
+                                    telefono, 
+                                    contrasena);
                             clienteFa.registrar(cliente);
                          
                             ec.redirect(ec.getRequestContextPath() + "/faces/iniciar.xhtml");
                         } else {
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "La contraseña no coincide"));
+                            FacesContext.getCurrentInstance().addMessage(
+                                    null, 
+                                    new FacesMessage(
+                                            FacesMessage.SEVERITY_FATAL, 
+                                            "Error", 
+                                            "La contraseña no coincide"));
                         }
                     } else {
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El telefono debe de ser numerico"));
+                        FacesContext.getCurrentInstance().addMessage(
+                                null, 
+                                new FacesMessage(
+                                        FacesMessage.SEVERITY_FATAL, 
+                                        "Error", 
+                                        "El telefono debe de ser numerico"));
                     }
                 } else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El correo esta mal el formato es así usuario@gmail.com"));
+                    FacesContext.getCurrentInstance().addMessage(
+                            null, 
+                            new FacesMessage(
+                                    FacesMessage.SEVERITY_FATAL, 
+                                    "Error", 
+                                    "El correo esta mal el formato es así usuario@gmail.com"));
                 }
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El apellido esta mal"));
+                FacesContext.getCurrentInstance().addMessage(
+                        null, 
+                        new FacesMessage(
+                                FacesMessage.SEVERITY_FATAL, 
+                                "Error", 
+                                "El apellido esta mal"));
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El nombres esta mal"));
+            FacesContext.getCurrentInstance().addMessage(
+                    null, 
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_FATAL, 
+                            "Error", 
+                            "El nombres esta mal"));
         }
     }
+    
     public void autenticar() throws IOException {
         clienteFa = new ClienteFacade();
         Cliente cliente = clienteFa.buscarPorCorreo(correo);
@@ -157,14 +190,29 @@ public class clienteBean implements Serializable {
                 System.out.println(sesion.getAttribute("cliente_id"));
                 id_cliente=(int)sesion.getAttribute("cliente_id");
                   
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "BIENVENIDO", "BIENVENIDO" + cliente.getNombre()));
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(
+                                FacesMessage.SEVERITY_FATAL, 
+                                "BIENVENIDO", 
+                                "BIENVENIDO" + cliente.getNombre()));
                 ec.redirect(ec.getRequestContextPath() + "/faces/cuenta.xhtml");
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La contraseña no coincide", "La contraseña no coincide"));
+            FacesContext.getCurrentInstance().addMessage(
+                    null, 
+                    new FacesMessage(
+                        FacesMessage.SEVERITY_FATAL, 
+                        "La contraseña no coincide", 
+                        "La contraseña no coincide"));
 
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario no existe", "El usuario no existe"));
+        FacesContext.getCurrentInstance().addMessage(
+                null, 
+                new FacesMessage(
+                        FacesMessage.SEVERITY_FATAL, 
+                        "El usuario no existe", 
+                        "El usuario no existe"));
     }
+    
     private void cambiaSession() {
         sesion = (HttpSession) ec.getSession(false);
         System.out.println("Sesión nueva: " + sesion.isNew());
@@ -200,7 +248,8 @@ public class clienteBean implements Serializable {
             ec.redirect(ec.getRequestContextPath() + "/faces/catalogo.xhtml");
         }
     }
-     public String encripta(String cadena) {
+    
+    public String encripta(String cadena) {
         String texto = cadena;
         System.out.println("Esta es sin encriptar: " + texto);
         String secretKey = "qualityinfosolutions"; //llave para encriptar datos
