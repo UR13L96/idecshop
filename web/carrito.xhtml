@@ -8,6 +8,9 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>TeleCable</title>
+        <f:metadata>
+            <f:viewAction action="#{cliente.renderizarPagina()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="templates/master.xhtml">

@@ -28,7 +28,7 @@
                             
                             Nombre:
                             <h:outputLabel>
-                                <p:inputText id="nom" value="#{cliente.nombre}" required="true" style="width: 100%" requiredMessage="Nombre, no puede estar vacio"
+                                <p:inputText id="nom" value="#{cliente.nombre}" required="true" requiredMessage="Nombre, no puede estar vacio"
                                                      validatorMessage="Nombre no fue llenado correctamente">
                                     <f:validateLength minimum="3" maximum="50"/> 
                                     <p:tooltip for="nom" value="El Nombre debe de contener solo letras"/>
@@ -36,7 +36,7 @@
                             </h:outputLabel>
                             Apellidos:
                             <p:outputLabel>
-                                <p:inputText id="apP" required="true" value="#{cliente.apellidos}" style="width: 100%" requiredMessage="Apellidos, no puede estar vacio"
+                                <p:inputText id="apP" required="true" value="#{cliente.apellidos}" requiredMessage="Apellidos, no puede estar vacio"
                                                      validatorMessage="Apellidos no fue llenado correctamente">
                                     <f:validateLength minimum="3" maximum="50"/> 
                                          <p:tooltip for="apP" value="El Apellido debe de contener solo letras"/>
@@ -45,7 +45,7 @@
                             </p:outputLabel>
                             Telefono:
                             <p:outputLabel>
-                                <p:inputText id="tel" style="width: 100%" required="true" value="#{cliente.telefono}" requiredMessage="Telefono, no puede estar vacio"
+                                <p:inputText id="tel" required="true" value="#{cliente.telefono}" requiredMessage="Telefono, no puede estar vacio"
                                                      validatorMessage="Telefono no fue llenado correctamente">
                                     <f:validateLength minimum="10" maximum="12"/> 
                                             <p:tooltip for="tel" value="El telefono debe contener solo números"/>
@@ -54,7 +54,7 @@
                             
                             Correo:
                             <p:outputLabel>
-                                <p:inputText id="correo" style="width: 100%" required="true" value="#{cliente.correo}" requiredMessage="correo, no puede estar vacio"
+                                <p:inputText id="correo" required="true" value="#{cliente.correo}" requiredMessage="correo, no puede estar vacio"
                                                      validatorMessage="Nombre no fue llenado correctamente">
                               
                                     <p:tooltip for="correo" value="El correo debe ser llenado bajo el formato adecuado"/>
@@ -76,7 +76,8 @@
                         </h:panelGrid>
                         <center>
                             <br/>
-                            <h:commandButton value="Enviar" action="#{cliente.registrar()}"/></center>
+                            <p:commandButton value="Enviar" action="#{cliente.registrar()}"/>
+                        </center>
                     </h:form>
                 </div>
             </ui:define>

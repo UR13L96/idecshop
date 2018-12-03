@@ -27,11 +27,11 @@
                         <h:panelGrid columns="1" >
                             Correo:
                             <h:outputLabel>
-                                <h:inputText id="correo" required="true" requiredMessage="Correo, no puede estar vacio" value="#{contactoBean.correo}" 
+                                <p:inputText id="correo" required="true" requiredMessage="Correo, no puede estar vacio" value="#{contactoBean.correo}" 
                                              validatorMessage="Correo no fue llenado correctamente">
                                     <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                                     <p:tooltip for="correo" value="El correo debe ser llenado bajo el formato adecuado"/>
-                                </h:inputText>
+                                </p:inputText>
                             </h:outputLabel>
                             Mensaje:
                             <h:outputLabel>

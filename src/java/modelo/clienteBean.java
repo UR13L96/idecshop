@@ -158,7 +158,7 @@ public class clienteBean implements Serializable {
                 id_cliente=(int)sesion.getAttribute("cliente_id");
                   
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "BIENVENIDO", "BIENVENIDO" + cliente.getNombre()));
-                ec.redirect(ec.getRequestContextPath() + "/faces/cctv.xhtml");
+                ec.redirect(ec.getRequestContextPath() + "/faces/cuenta.xhtml");
             }
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La contraseña no coincide", "La contraseña no coincide"));
 
@@ -251,5 +251,13 @@ public class clienteBean implements Serializable {
         }
         System.out.println("Esta es desencriptada 12" + base64EncryptedString);
         return base64EncryptedString;
+    }
+    
+    public void renderizarPagina() throws IOException {
+        if (!clienteValidado()) {               
+            ec.setResponseStatus(HttpServletResponse.SC_NOT_FOUND);
+            ec.dispatch("/error.xhtml");
+            fc.responseComplete();
+        }
     }
 }

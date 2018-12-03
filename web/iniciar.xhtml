@@ -29,16 +29,16 @@
                         <h:panelGrid columns="2" id="hpgLogin" >  
                       
                             <p:outputLabel  value="Usuario:" />
-                            <p:inputText required="true" value="#{cliente.correo}"/>
+                            <p:inputText required="true" requiredMessage="El usuario es requerido" value="#{cliente.correo}"/>
                       
                             <p:outputLabel  value="Contraseña:" />
-                            <p:inputText required="true" type="password" value="#{cliente.contrasena}"/>      
+                            <p:inputText required="true" requiredMessage="La contraseña es requerida" type="password" value="#{cliente.contrasena}"/>      
                             <h:commandLink value="Registrar" action="registro" immediate="true"/>
 
                         </h:panelGrid>
                          <br/>
                          <br/>
-                           <p:captcha></p:captcha>
+                         <p:captcha required="true" requiredMessage="Por favor llene el captcha"></p:captcha>
                          <center>                            
                             <p:commandButton value="Entrar" update="hpgLogin,growl" action="#{cliente.autenticar()}" />
                         </center>

@@ -49,10 +49,10 @@
                                                  value="Cuenta" rendered="#{cliente.clienteValidado()}">
                                 </h:commandButton>
                                 <div class="dropdown-content">
+                                    <h:commandButton styleClass="boton_hd" action="diagnostico" 
+                                             value="Soporte técnico"/>
                                     <h:commandButton styleClass="boton_hd" action="#{cliente.cerrarSesion()}" 
-                                             value="Cerrar sesión">
-                                
-                                    </h:commandButton>
+                                             value="Cerrar sesión"/>
                                 </div>
                             </div>
                         </li>

@@ -7,6 +7,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>TeleCable</title>
+        <f:metadata>
+            <f:viewAction action="#{cliente.renderizarPagina()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="templates/master.xhtml">
@@ -115,14 +118,15 @@
                                         </p:inputText>
                                 </p:panel>
                             </p:panelGrid>
-                             <div align="center">
-                    <p:button value="Confirmar compra" style="margin-top: 16px"></p:button>
-                </div>
+                             
+                             <center>
+                                 <h:panelGroup>
+                                    <p:commandButton action="confirmacion" value="Confirmar compra" ajax="false" />
+                                </h:panelGroup> 
+                             </center>
                         </h:form>
                     </p:panel>
                 </p:panelGrid>
-                
-              
             </ui:define>
                 
             <ui:define name="bottom">
